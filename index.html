@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="assets/sprites/Logo.png">
+  <!--font awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Compiled and minified CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <!--Font-->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <!--custom styles-->
+  <link href="styles/style.css" rel="stylesheet">
+  <title>The Gainlings - Mint</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <header>
+    <nav class="navbar">
+      <div class="nav-wrapper">
+
+        <image class="main-banner" src="assets/sprites/Header.png" alt="logo"> </image>
+
+        <div class="socialButton-container">
+          <div class="socialContainerInner solo">
+            <a href="https://twitter.com/thegainlings" class="socialButton twitter" target="_blank"> </a>
+            <a href="https://opensea.com/gainlings" class="socialButton opensea inactive" target="_blank"> </a>
+            <a href="https://the-gainlings.gitbook.io/the-gainlings" class="socialButton gitbook" target="_blank"> </a>
+            <a href="https://discord.gg/3v6TTkfuY8" class="socialButton discord" target="_blank"> </a>
+          </div>
+        </div>
+
+        <div class="triplet"></div>
+        <div class="triplet"></div>
+      </div>
+      </div>
+    </nav>
+  </header>
+  <main>
+
+
+    <div class="main-banner-container">
+
+      <div class="congratsContainer" id="congratsContainer">
+        <div class="congratsInner" id="congratsInner">
+          <div class="congratsTitle">CONGRATS! MINT SUCCEED!</div>
+          <div class="congratsText1">YOUR ARMY WILL REVEAL IN A MINUTE</div>
+          <div class="congratsText2">CHECKOUT THE</div>
+          <div class="battlefieldLinkBox">
+            <a href="https://testnet-fight.thegainlings.io" class="battlefieldLink" target="_blank">BATTLEFIELD </a>
+          </div>
+
+        </div>
+      </div>
+
+      <image class="main-banner" src="assets/sprites/Background.png"></image>
+
+
+      <!-- Long flag with sideflag container-->
+      <div class="triplet-container topSpaced">
+        <div class="triplet sider">
+          <img class="" src="assets/sprites/FlagThinLongRoyal.png" /></image>
+        </div>
+        <div class="triplet flag">
+          <div class="flagText">
+            <p class="smaller">SEASON I - RULES</p>
+            <div class="distancer10"> </div>
+            <p class="smaller">MAX SUPPLY: 10k</p>
+            <p class="smaller">PRICE: 0.015 ETH</p>
+            <p class="smaller">BOUNTY: 0.012 ETH</p>
+          </div>
+          <div class="distancer180"> </div>
+          <p class="smaller" id="mintStage">Welcome</p>
+          <div class="distancer17"> </div>
+          <p class="connectButton" id="connectButton">CONNECT</p>
+        </div>
+        <div class="triplet sider">
+          <img class="" src="assets/sprites/FlagThinLongRoyal.png" /></image>
+          <p></p>
+        </div>
+      </div>
+
+
+      <!-- Mintbutton with torch container-->
+      <div class="triplet-container">
+        <div class="triplet sider torch">
+          <img class="" src="assets/sprites/RedFlame.gif" /></image>
+          <p></p>
+        </div>
+        <div class="triplet mint">
+          <div id="mintBtn" class="mintButton">
+          </div>
+
+          <div class="distancer10"> </div>
+          <div class="distancer10"> </div>
+          <div class="range">
+            <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="5">
+          </div>
+          <div class="rangeQty">
+            <span class="rangeValue" id="rangeValue">1 </span>
+          </div>
+          <div class="rangePricing">
+            <span class="rangePrice" id="rangePrice">0.015 ETH </span>
+          </div>
+          <div class="distancer1"> </div>
+          <div class="distancer1"> </div>
+          <div class="distancer70"> </div>
+
+          <div class="smallFlex">
+            <p class="smaller title smallText">SUPPLY</p>
+            <p class="smaller stoneVal smallText" id="supply">0 / 10000</p>
+          </div>
+          <div class="distancer17"> </div>
+
+          <div class="smallFlex">
+            <p class="smaller title smallText">POOL</p>
+            <p class="smaller stoneVal smallText" id="pod">0 ETH</p>
+          </div>
+        </div>
+        <div class="triplet sider torch">
+          <img class="" src="assets/sprites/RedFlame.gif" /></image>
+          <p></p>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </main>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <!-- 
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+  -->
+  <script src="https://cdn.jsdelivr.net/npm/keccak256@1.0.6/keccak256.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/merkletreejs@0.3.9/merkletree.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.1/dist/web3.min.js"></script>
+  <script src="scripts/abiContract.js"> </script>
+  <script src="scripts/contractApi.js"> </script>
+  <script src="scripts/mint.js"> </script>
+  <script>
+    let contractAddress = "0x8c391a28A2511869A50B6AC6b282Cc957dE73003";
+    let marketAddress = "0x17596F4C9AAfa38Ca0Cd11DE76977A16e1a120D6"
+
+    const queryString = window.location;
+    let testnet = queryString.toString().includes('testnet');
+
+    console.log("You are on " + queryString);
+    let testnetAlchemyUrl = "wss://arb-goerli.g.alchemy.com/v2/q0qef0gMfvgDA9_sCR0zXyF1_6faw7wW";
+    let mainnetAlchemyUrl = "wss://arb-mainnet.g.alchemy.com/v2/8GDOyfUM_cfMuwCF4CzC1LfA41YTw-8J";
+    let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
+    console.log(alchemyUrl);
+    document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintG(); });
+
+    let mintSlider = document.getElementById('mintSlider');
+    mintSlider.addEventListener('input', function (e) {
+      document.getElementById('rangePrice').innerText = ((Math.round(mintSlider.value * tokenPrice * 10000) / 10000).toString() + " ETH");
+      document.getElementById('rangeValue').innerText = (mintSlider.value).toString();
+    });
+
+    buildMerkeTree();
+
+    let tokenPrice = 0;
+    let userMints = 0;
+    let connected = false;
+    let supply = 0;
+    _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
+      console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
+      _getPublicPrice((price) => {
+        tokenPrice = ToEth(price);
+        _getSupply((supplyResult) => {
+          supply = supplyResult;
+          updateSupplyUI(supplyResult, tokenPrice);
+          subscribeSupply();
+
+          _getPhase().then((response) => {
+            console.log("Stage is: " + response);
+            var text = response == 1 ? `ALLOWLIST MINT OPEN` : response == 2 ? `PUBLIC MINT OPEN` : "MINT CLOSED";
+            document.getElementById("mintStage").innerHTML = text;
+          });
+        })
+      })
+    });
+
+    function connectWallet() {
+      setupWalletConnectionMint(contractAddress, abiContract.abi).then((connected) => {
+        getUserChain(result => {
+          if (result == arbitrumGoerliChainId) {
+            OnConnected();
+          }
+          else {
+            console.log("connected, not on the right chain, add?")
+            if (testnet) {
+              addTestNetwork(nullResp => {
+                OnConnected();
+              })
+            }
+            else {
+              addMainNetwork(nullResp => {
+                OnConnected();
+              })
+            }
+          }
+        })
+      });
+    }
+
+    function OnConnected() {
+      connected = true;
+      getMints(walletProvider.account, mints => {
+        userMints = mints;
+        console.log("Connected, on the right chain, fetching mints: " + mints);
+        document.getElementById("connectButton").innerText = "CONNECTED";
+
+        document.getElementById('mintSlider').to = (5 - userMints);
+      })
+    }
+
+    function updateSupplyUI(supply, price) {
+      document.getElementById("supply").innerHTML = `${supply} / 10'000`
+      document.getElementById("pod").innerHTML = `${(supply * price).toFixed(3)} ETH`
+    }
+
+    function subscribeSupply() {
+      getBlockNumber().then((blockNr) => {
+        _subscribeGainlingsEvents(onAnyGainlingEvent,error => {
+          console.log("Minting error:" + error);
+        });
+      });
+
+    }
+    
+    function onAnyGainlingEvent(data, event) {
+      console.log(JSON.stringify(data));
+      let type = data["0"];
+      let content = data["1"];
+      if(type == "0"){
+        let tokenId = content;
+        supply = Number(supply) + Number(content);
+        updateSupplyUI(supply,tokenPrice);
+      }
+    }
+    
+    function buildMerkeTree() {
+      fetch("assets/docs/allowlist.json")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          var addresses = data.data.map(function (v) { return v.wallet; });
+          const leafNodes = addresses.map((a) => a.toLowerCase()).map((a) => keccak256(a));
+          merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
+          let root = merkleTree.getHexRoot();
+          console.log("Merkletree calculated, root is: " + root);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    }
+
+    function mintG() {
+      var successContaier = document.getElementById("congratsContainer");
+      successContaier.style.visibility = 'hidden';
+
+      if (!connected) {
+        blinkConnectWallet();
+      }
+      else {
+
+        getPhase(stage => {
+          var qty = document.getElementById("mintSlider").value;
+          var proof = merkleTree.getHexProof(keccak256(walletProvider.account.toLowerCase()));
+          var allowListed = proof.length > 0;
+
+          if (stage == 1 && allowListed) {
+            mintGainlingsAllowListed(qty,tokenPrice, proof, result => {
+              if (result.success) {
+                successContaier.style.visibility = 'visible';
+              }
+              else {
+
+              }
+            })
+          }
+          else if (stage == 2) {
+            mintGainlings(qty, tokenPrice, result => {
+              if (result.success) {
+                successContaier.style.visibility = 'visible';
+              }
+              else {
+
+              }
+            });
+          }
+          else {
+            console.log("not the right time");
+          }
+        })
+      }
+    }
+
+    function blinkConnectWallet() {
+      document.getElementById('connectButton').style.color = '#c40000';
+      setTimeout(alertFunc, 1000);
+    }
+
+    function alertFunc() {
+      document.getElementById('connectButton').style.color = '#ffffff';
+    }
+
+    function hexToBytes(hex) {
+      for (var bytes = [], c = 0; c < hex.length; c += 2)
+        bytes.push(parseInt(hex.substring(c, 2), 16));
+      return bytes;
+    }
+
+
+
+
+  </script>
+  <!--Compiled and minified JavaScript-->
+
+</body>
+
+</html>
