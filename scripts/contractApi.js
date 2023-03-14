@@ -10,8 +10,8 @@
 ///////// ARBITRUM //////////
 /////////////////////////////
 
-const arbitrumGoerliChainId = 0x66eed;
-const arbitrumOneChainId = 0xA4B1
+const arbitrumGoerliChainId = 0x13881;
+const arbitrumOneChainId = 0x1
 
 
 /////////////////////////////
@@ -313,15 +313,15 @@ async function addTestNetwork(callback) {
     const result = await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [{
-            chainId: "0x66eed",
-            rpcUrls: ["https://goerli-rollup.arbitrum.io/rpc"],
-            chainName: "Arbitrum Goerli",
+            chainId: "0x13881",
+            rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+            chainName: "Polygon",
             nativeCurrency: {
-                name: "GoerliETH",
-                symbol: "ETH",
+                name: "Mumbai",
+                symbol: "MATIC",
                 decimals: 18
             },
-            blockExplorerUrls: ["https://goerli-rollup-explorer.arbitrum.io/"]
+            blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
         }]
     });
     console.log(result);
@@ -332,15 +332,15 @@ async function addMainNetwork(callback) {
     const result = await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [{
-            chainId: "0xA4B1",
-            rpcUrls: ["https://arb1.arbitrum.io/rpc"],
-            chainName: "Arbitrum One",
+            chainId: "0x1",
+            rpcUrls: ["https://eth.llamarpc.com"],
+            chainName: "Ethereum",
             nativeCurrency: {
                 name: "ETH",
                 symbol: "ETH",
                 decimals: 18
             },
-            blockExplorerUrls: ["https://arbiscan.io/"]
+            blockExplorerUrls: ["https://etherscan.io/"]
         }]
     });
     callback && callback(result);
