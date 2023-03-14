@@ -152,15 +152,14 @@
   <script src="scripts/contractApi.js"> </script>
   <script src="scripts/mint.js"> </script>
   <script>
-    let contractAddress = "0x8c391a28A2511869A50B6AC6b282Cc957dE73003";
-    let marketAddress = "0x17596F4C9AAfa38Ca0Cd11DE76977A16e1a120D6"
+    let contractAddress = "0xEA40E1951AcebD3b47618C0A7143BB6e18826e95";
 
     const queryString = window.location;
     let testnet = queryString.toString().includes('testnet');
 
     console.log("You are on " + queryString);
-    let testnetAlchemyUrl = "wss://arb-goerli.g.alchemy.com/v2/q0qef0gMfvgDA9_sCR0zXyF1_6faw7wW";
-    let mainnetAlchemyUrl = "wss://arb-mainnet.g.alchemy.com/v2/8GDOyfUM_cfMuwCF4CzC1LfA41YTw-8J";
+    let testnetAlchemyUrl = "wss://polygon-mumbai.g.alchemy.com/v2/DR9fLrR8ahzZ7phWGyEOVFR05ZNOYAAv";
+    let mainnetAlchemyUrl = "wss://eth-mainnet.g.alchemy.com/v2/lx9i6xk2dwBVhfvujFMeqzmkeHvpufEz";
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
@@ -254,24 +253,7 @@
         updateSupplyUI(supply,tokenPrice);
       }
     }
-    
-    function buildMerkeTree() {
-      fetch("assets/docs/allowlist.json")
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          var addresses = data.data.map(function (v) { return v.wallet; });
-          const leafNodes = addresses.map((a) => a.toLowerCase()).map((a) => keccak256(a));
-          merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
-          let root = merkleTree.getHexRoot();
-          console.log("Merkletree calculated, root is: " + root);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    }
-
+        
     function mintG() {
       var successContaier = document.getElementById("congratsContainer");
       successContaier.style.visibility = 'hidden';
