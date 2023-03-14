@@ -10,8 +10,8 @@
 ///////// ARBITRUM //////////
 /////////////////////////////
 
-const arbitrumGoerliChainId = 0x13881;
-const arbitrumOneChainId = 0x1
+const GoerliChainId = 0x13881;
+const ethereumChainId = 0x1
 
 
 /////////////////////////////
@@ -32,11 +32,10 @@ function ToWei(eth) {
 
 //alchemy setup
 let alchemyProvider = {};
-async function _setupAlchemyConnection(contractAddress, abi, marketAddress, marketAbi, rpcUrl) {
+async function _setupAlchemyConnection(contractAddress, abi,rpcUrl) {
     var alchemyWeb3 = AlchemyWeb3.createAlchemyWeb3(rpcUrl);
     var tokenContract = await new alchemyWeb3.eth.Contract(abi, contractAddress);
-    var marketPlaceContract = await new alchemyWeb3.eth.Contract(marketAbi, marketAddress);
-    alchemyProvider = { contract: tokenContract, web3: alchemyWeb3, market: marketPlaceContract };
+    alchemyProvider = { contract: tokenContract, web3: alchemyWeb3, };
 }
 
 
@@ -252,7 +251,7 @@ async function _getTokenSeed(tokenId, callback) {
 let walletProvider = {}
 
 
-async function setupWalletConnection(contractAddress, abi, marketAddress, marketAbi, callback) {
+async function setupWalletConnection(contractAddress, abi, callback) {
     if (window.ethereum === undefined) {
         callback && callback(false);
         console.log("No eth installed");
@@ -272,7 +271,6 @@ async function setupWalletConnection(contractAddress, abi, marketAddress, market
 
         const nativeWeb3 = new Web3(window.ethereum);
         const tokenContract = new nativeWeb3.eth.Contract(abi, contractAddress);
-        const marketPlaceContract = new nativeWeb3.eth.Contract(marketAbi, marketAddress);
         walletProvider = { account: walletProvider.account, contract: tokenContract, market: marketPlaceContract, web3: nativeWeb3 };
     }
 
@@ -306,25 +304,6 @@ async function getUserChain(callback) {
     const result = await window.ethereum.request({
         method: 'eth_chainId',
     });
-    callback && callback(result);
-    return result;
-}
-async function addTestNetwork(callback) {
-    const result = await window.ethereum.request({
-        method: "wallet_addEthereumChain",
-        params: [{
-            chainId: "0x13881",
-            rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
-            chainName: "Polygon",
-            nativeCurrency: {
-                name: "Mumbai",
-                symbol: "MATIC",
-                decimals: 18
-            },
-            blockExplorerUrls: ["https://mumbai.polygonscan.com/"]
-        }]
-    });
-    console.log(result);
     callback && callback(result);
     return result;
 }
@@ -399,17 +378,7 @@ async function getSeasonStartBlock(callback) {
     callback && callback(result);
     return result;
 }
-async function getSeasonBattleStartBlockTime(callback) {
-    var result = 0;
-    await walletProvider.contract.methods
-        ._seasonBattleStartBlockTime()
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
+
 async function getSeasonNumber(callback) {
     var result = 0;
     await walletProvider.contract.methods
@@ -421,17 +390,7 @@ async function getSeasonNumber(callback) {
     callback && callback(result);
     return result;
 }
-async function getDustingTime(callback) {
-    var result = 0;
-    await walletProvider.contract.methods
-        ._dustingTime()
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
+
 async function getTokenSeed(tokenId, callback) {
     let result = 0;
     await walletProvider.contract.methods
@@ -470,39 +429,6 @@ async function getStack(tokenId, callback) {
     let result = 0;
     await walletProvider.contract.methods
         .getStack(tokenId)
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
-async function getCooldown(tokenId, callback) {
-    let result = 0;
-    await walletProvider.contract.methods
-        .getCooldown(tokenId)
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
-async function getTokenIdsOfOwner(owner, callback) {
-    let result = 0;
-    await walletProvider.contract.methods
-        .getTokenIds(owner)
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
-async function getMints(owner, callback) {
-    var result = 0;
-    await alchemyProvider.contract.methods
-        ._mints(owner)
         .call()
         .then((receipt) => {
             result = receipt;
