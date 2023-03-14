@@ -1,7 +1,7 @@
 
 /*
 let blockchain = {};
-let contractAddress = "0x07003D9D602C9E5F488dA8AD2F96432640d9Ed2d";
+let contractAddress = "0xEA40E1951AcebD3b47618C0A7143BB6e18826e95";
 let mintingPrice = 0;
 
 function isEthAddress() {
