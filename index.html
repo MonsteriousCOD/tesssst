@@ -55,10 +55,10 @@
       <div class="congratsContainer" id="congratsContainer">
         <div class="congratsInner" id="congratsInner">
           <div class="congratsTitle">CONGRATS! MINT SUCCEED!</div>
-          <div class="congratsText1">YOUR ARMY WILL REVEAL IN A MINUTE</div>
-          <div class="congratsText2">CHECKOUT THE</div>
+          <div class="congratsText1">CHECKOUT YOUR ARMY ON OPENSEA</div>
+          <div class="congratsText2">FIGHTING WILL BEGIN SOON</div>
           <div class="battlefieldLinkBox">
-            <a href="https://testnet-fight.thegainlings.io" class="battlefieldLink" target="_blank">BATTLEFIELD </a>
+          
           </div>
 
         </div>
@@ -77,8 +77,8 @@
             <p class="smaller">SEASON I - RULES</p>
             <div class="distancer10"> </div>
             <p class="smaller">MAX SUPPLY: 10k</p>
-            <p class="smaller">PRICE: 0.015 ETH</p>
-            <p class="smaller">BOUNTY: 0.012 ETH</p>
+            <p class="smaller">PRICE: 0.01 ETH</p>
+            <p class="smaller">BOUNTY: 0.007 ETH</p>
           </div>
           <div class="distancer180"> </div>
           <p class="smaller" id="mintStage">Welcome</p>
@@ -105,13 +105,13 @@
           <div class="distancer10"> </div>
           <div class="distancer10"> </div>
           <div class="range">
-            <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="5">
+            <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="20">
           </div>
           <div class="rangeQty">
             <span class="rangeValue" id="rangeValue">1 </span>
           </div>
           <div class="rangePricing">
-            <span class="rangePrice" id="rangePrice">0.015 ETH </span>
+            <span class="rangePrice" id="rangePrice">0.01 ETH </span>
           </div>
           <div class="distancer1"> </div>
           <div class="distancer1"> </div>
@@ -153,7 +153,7 @@
   <script src="scripts/mint.js"> </script>
   <script>
     let contractAddress = "0x8c391a28A2511869A50B6AC6b282Cc957dE73003";
-    let marketAddress = "0x17596F4C9AAfa38Ca0Cd11DE76977A16e1a120D6"
+  
 
     const queryString = window.location;
     let testnet = queryString.toString().includes('testnet');
@@ -172,7 +172,6 @@
       document.getElementById('rangeValue').innerText = (mintSlider.value).toString();
     });
 
-    buildMerkeTree();
 
     let tokenPrice = 0;
     let userMints = 0;
@@ -244,7 +243,7 @@
 
     }
     
-    function onAnyGainlingEvent(data, event) {
+    function onPublicsale(data, event) {
       console.log(JSON.stringify(data));
       let type = data["0"];
       let content = data["1"];
@@ -255,23 +254,6 @@
       }
     }
     
-    function buildMerkeTree() {
-      fetch("assets/docs/allowlist.json")
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          var addresses = data.data.map(function (v) { return v.wallet; });
-          const leafNodes = addresses.map((a) => a.toLowerCase()).map((a) => keccak256(a));
-          merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
-          let root = merkleTree.getHexRoot();
-          console.log("Merkletree calculated, root is: " + root);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-    }
-
     function mintG() {
       var successContaier = document.getElementById("congratsContainer");
       successContaier.style.visibility = 'hidden';
