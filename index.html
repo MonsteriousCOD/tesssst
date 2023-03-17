@@ -55,10 +55,10 @@
       <div class="congratsContainer" id="congratsContainer">
         <div class="congratsInner" id="congratsInner">
           <div class="congratsTitle">CONGRATS! MINT SUCCEED!</div>
-          <div class="congratsText1">CHECKOUT YOUR ARMY ON OPENSEA</div>
-          <div class="congratsText2">FIGHTING WILL BEGIN SOON</div>
+          <div class="congratsText1">YOUR ARMY WILL REVEAL IN A MINUTE</div>
+          <div class="congratsText2">CHECKOUT THE</div>
           <div class="battlefieldLinkBox">
-          
+            <a href="https://testnet-fight.thegainlings.io" class="battlefieldLink" target="_blank">BATTLEFIELD </a>
           </div>
 
         </div>
@@ -77,8 +77,8 @@
             <p class="smaller">SEASON I - RULES</p>
             <div class="distancer10"> </div>
             <p class="smaller">MAX SUPPLY: 10k</p>
-            <p class="smaller">PRICE: 0.01 ETH</p>
-            <p class="smaller">BOUNTY: 0.007 ETH</p>
+            <p class="smaller">PRICE: 0.015 ETH</p>
+            <p class="smaller">BOUNTY: 0.012 ETH</p>
           </div>
           <div class="distancer180"> </div>
           <p class="smaller" id="mintStage">Welcome</p>
@@ -105,13 +105,13 @@
           <div class="distancer10"> </div>
           <div class="distancer10"> </div>
           <div class="range">
-            <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="20">
+            <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="5">
           </div>
           <div class="rangeQty">
             <span class="rangeValue" id="rangeValue">1 </span>
           </div>
           <div class="rangePricing">
-            <span class="rangePrice" id="rangePrice">0.01 ETH </span>
+            <span class="rangePrice" id="rangePrice">0.015 ETH </span>
           </div>
           <div class="distancer1"> </div>
           <div class="distancer1"> </div>
@@ -152,15 +152,15 @@
   <script src="scripts/contractApi.js"> </script>
   <script src="scripts/mint.js"> </script>
   <script>
-    let contractAddress = "0x8c391a28A2511869A50B6AC6b282Cc957dE73003";
-  
+    let contractAddress = "0xc5Fdf5aBCdD7E9f9275f46a4ACB27865C83B7B67";
+    
 
     const queryString = window.location;
     let testnet = queryString.toString().includes('testnet');
 
     console.log("You are on " + queryString);
-    let testnetAlchemyUrl = "wss://arb-goerli.g.alchemy.com/v2/q0qef0gMfvgDA9_sCR0zXyF1_6faw7wW";
-    let mainnetAlchemyUrl = "wss://arb-mainnet.g.alchemy.com/v2/8GDOyfUM_cfMuwCF4CzC1LfA41YTw-8J";
+    let testnetAlchemyUrl = "wss://eth-goerli.g.alchemy.com/v2/rbmXgfY7YvhIgVXMcnhn5upiIW3gj6a2";
+    let mainnetAlchemyUrl = "wss://eth-mainnet.g.alchemy.com/v2/XGQ9xDSaDDcpnU3MgP6prY1EzDImQ0Mw";
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
@@ -172,29 +172,11 @@
       document.getElementById('rangeValue').innerText = (mintSlider.value).toString();
     });
 
-
     let tokenPrice = 0;
     let userMints = 0;
     let connected = false;
     let supply = 0;
-    _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
-      console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
-      _getPublicPrice((price) => {
-        tokenPrice = ToEth(price);
-        _getSupply((supplyResult) => {
-          supply = supplyResult;
-          updateSupplyUI(supplyResult, tokenPrice);
-          subscribeSupply();
-
-          _getPhase().then((response) => {
-            console.log("Stage is: " + response);
-            var text = response == 1 ? `ALLOWLIST MINT OPEN` : response == 2 ? `PUBLIC MINT OPEN` : "MINT CLOSED";
-            document.getElementById("mintStage").innerHTML = text;
-          });
-        })
-      })
-    });
-
+   
     function connectWallet() {
       setupWalletConnectionMint(contractAddress, abiContract.abi).then((connected) => {
         getUserChain(result => {
@@ -234,27 +216,7 @@
       document.getElementById("pod").innerHTML = `${(supply * price).toFixed(3)} ETH`
     }
 
-    function subscribeSupply() {
-      getBlockNumber().then((blockNr) => {
-        _subscribeGainlingsEvents(onAnyGainlingEvent,error => {
-          console.log("Minting error:" + error);
-        });
-      });
-
-    }
-    
-    function onPublicsale(data, event) {
-      console.log(JSON.stringify(data));
-      let type = data["0"];
-      let content = data["1"];
-      if(type == "0"){
-        let tokenId = content;
-        supply = Number(supply) + Number(content);
-        updateSupplyUI(supply,tokenPrice);
-      }
-    }
-    
-    function mintG() {
+    function mintViking() {
       var successContaier = document.getElementById("congratsContainer");
       successContaier.style.visibility = 'hidden';
 
@@ -262,38 +224,15 @@
         blinkConnectWallet();
       }
       else {
-
-        getPhase(stage => {
-          var qty = document.getElementById("mintSlider").value;
-          var proof = merkleTree.getHexProof(keccak256(walletProvider.account.toLowerCase()));
-          var allowListed = proof.length > 0;
-
-          if (stage == 1 && allowListed) {
-            mintGainlingsAllowListed(qty,tokenPrice, proof, result => {
+        
+        mintGainlings(qty, tokenPrice, result => {
               if (result.success) {
                 successContaier.style.visibility = 'visible';
-              }
-              else {
-
-              }
-            })
-          }
-          else if (stage == 2) {
-            mintGainlings(qty, tokenPrice, result => {
-              if (result.success) {
-                successContaier.style.visibility = 'visible';
-              }
-              else {
-
-              }
-            });
-          }
-          else {
-            console.log("not the right time");
-          }
-        })
-      }
-    }
+     }         
+              
+              
+              
+              
 
     function blinkConnectWallet() {
       document.getElementById('connectButton').style.color = '#c40000';
@@ -310,12 +249,8 @@
       return bytes;
     }
 
-
-
-
   </script>
   <!--Compiled and minified JavaScript-->
 
 </body>
-
 </html>
