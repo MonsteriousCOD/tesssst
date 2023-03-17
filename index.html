@@ -144,9 +144,7 @@
   <!-- 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
   -->
-  <script src="https://cdn.jsdelivr.net/npm/keccak256@1.0.6/keccak256.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/merkletreejs@0.3.9/merkletree.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.8.1/dist/web3.min.js"></script>
   <script src="scripts/abiContract.js"> </script>
   <script src="scripts/contractApi.js"> </script>
@@ -225,10 +223,13 @@
       }
       else {
         
-        mintGainlings(qty, tokenPrice, result => {
+        mint(qty, tokenPrice, result => {
               if (result.success) {
                 successContaier.style.visibility = 'visible';
-     }         
+              }
+    });
+  }
+}         
               
               
               
