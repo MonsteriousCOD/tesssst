@@ -110,7 +110,36 @@ async function _getMints(address, callback) {
 let walletProvider = {}
 
 
-async function setupWalletConnection(contractAddress, abi, callback) {
+async function setupWalletConnection(contractAddress, abi,callback) {
+    if (window.ethereum === undefined) {
+        callback && callback(false);
+        console.log("No eth installed");
+        return false;
+    }
+
+    if (!isEthAddress()) {
+        const isEnabled = await window.ethereum.enable();
+        const enable = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        if (isEnabled) {
+            const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+            walletProvider.account = accounts[0];
+        }
+    }
+    if (isEthAddress()) {
+        console.log(walletProvider.account);
+
+        const nativeWeb3 = new Web3(window.ethereum);
+        const tokenContract = new nativeWeb3.eth.Contract(abi, contractAddress);
+        const marketPlaceContract = new nativeWeb3.eth.Contract(marketAbi, marketAddress);
+        walletProvider = { account: walletProvider.account, contract: tokenContract, market: marketPlaceContract, web3: nativeWeb3 };
+    }
+
+    callback && callback(isEthAddress());
+
+    return isEthAddress();
+
+}
+async function setupWalletConnectionMint(contractAddress, abi, callback) {
     if (window.ethereum === undefined) {
         callback && callback(false);
         console.log("No eth installed");
