@@ -1,7 +1,7 @@
 
 /*
 let blockchain = {};
-let contractAddress = "0xEA40E1951AcebD3b47618C0A7143BB6e18826e95";
+let contractAddress = "0xc5Fdf5aBCdD7E9f9275f46a4ACB27865C83B7B67";
 let mintingPrice = 0;
 
 function isEthAddress() {
@@ -46,9 +46,10 @@ async function connect(callback) {
 
   return isEthAddress();
 }
-async function mintGainlingsAllowListed(quantity, proof,successContaier) {
-  let pricePerApe = 15000000000000000;
-  let normalPrice = pricePerApe * quantity;
+
+async function mintVikings(quantity,successContaier) {
+  let price = 10000000000000000;
+  let normalPrice = price * quantity;
   if (!(await connect())) {
     console.log('No Connection to eth');
     return;
@@ -56,7 +57,7 @@ async function mintGainlingsAllowListed(quantity, proof,successContaier) {
 
   try {
     let gas = await blockchain.myContract.methods
-      .whitelistMint(quantity, proof)
+      .mint(quantity)
       .estimateGas({
         from: blockchain.account,
         value: normalPrice,
@@ -65,48 +66,7 @@ async function mintGainlingsAllowListed(quantity, proof,successContaier) {
     gas *= 1.2;
     gas = Math.round(gas);
     blockchain.myContract.methods
-      .whitelistMint(quantity, proof)
-      .send({
-        from: blockchain.account,
-        value: normalPrice,
-        gas: gas,
-        maxFeePerGas: 30000000001, // 1.5 Gwei
-        maxPriorityFeePerGas: 30000000000, // .5 Gwei
-        type: '0x2'
-      })
-      .once('error', (err) => {
-        console.log(err);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        successContaier.style.visibility = 'visible';
-      });
-  }
-  catch (error) {
-    console.log(error);
-  }
-
-}
-async function mintGainlings(quantity,successContaier) {
-  let pricePerApe = 15000000000000000;
-  let normalPrice = pricePerApe * quantity;
-  if (!(await connect())) {
-    console.log('No Connection to eth');
-    return;
-  }
-
-  try {
-    let gas = await blockchain.myContract.methods
-      .mintQRNG(quantity)
-      .estimateGas({
-        from: blockchain.account,
-        value: normalPrice,
-      });
-    console.log("ESTIMATED GAS0: " + gas);
-    gas *= 1.2;
-    gas = Math.round(gas);
-    blockchain.myContract.methods
-      .mintQRNG(quantity)
+      .mint(quantity)
       .send({
         from: blockchain.account,
         value: normalPrice,
@@ -181,6 +141,6 @@ $('.rangeInput').on('input', (e) => {
 });
 
 $('.rangeInput').on('input', (e) => {
-  $('.rangePrice').text((Math.round(e.currentTarget.value * 0.015 * 10000) / 10000).toString() + " ETH");
+  $('.rangePrice').text((Math.round(e.currentTarget.value * 0.01 * 10000) / 10000).toString() + " ETH");
 });
 */
