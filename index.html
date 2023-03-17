@@ -176,7 +176,18 @@
     let userMints = 0;
     let connected = false;
     let supply = 0;
-   
+   _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
+      console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
+      _getPublicPrice((price) => {
+        tokenPrice = ToEth(price);
+        _getSupply((supplyResult) => {
+          supply = supplyResult;
+          updateSupplyUI(supplyResult, tokenPrice);
+          subscribeSupply();
+           });
+        })
+      })
+    
     function connectWallet() {
       setupWalletConnectionMint(contractAddress, abiContract,abi).then((connected) => {
         getUserChain(result => {
