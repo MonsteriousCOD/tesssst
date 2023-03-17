@@ -37,7 +37,12 @@ async function _setupAlchemyConnection(contractAddress, abi,rpcUrl) {
     var tokenContract = await new alchemyWeb3.eth.Contract(abi, contractAddress);
     alchemyProvider = { contract: tokenContract, web3: alchemyWeb3,};
 }
-
+async function _setupAlchemyConnectionMint(contractAddress, abi, rpcUrl) {
+    //console.log(abi);
+    var alchemyWeb3 = AlchemyWeb3.createAlchemyWeb3(rpcUrl);
+    var tokenContract = await new alchemyWeb3.eth.Contract(abi, contractAddress);
+    alchemyProvider = { contract: tokenContract, web3: alchemyWeb3};
+}
 
 //general methods\\
 async function _getLatestBlock(callback) {
