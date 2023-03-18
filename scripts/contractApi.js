@@ -86,7 +86,19 @@ async function _getBounty(tokenId, callback) {
 async function _getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
-        .price()
+        price()
+        call()
+        then((receipt) => {
+            result = receipt;
+        });
+    callback && callback(result);
+    return result;
+}
+
+async function _getMints(address, callback) {
+    var result = 0;
+    await alchemyProvider.contract.methods
+        ._mints(address)
         .call()
         .then((receipt) => {
             result = receipt;
@@ -94,8 +106,6 @@ async function _getPublicPrice(callback) {
     callback && callback(result);
     return result;
 }
-
-
 
 //////////////////////////
 // WALLET WALLET WALLET //  
@@ -125,8 +135,7 @@ async function setupWalletConnection(contractAddress, abi,callback) {
 
         const nativeWeb3 = new Web3(window.ethereum);
         const tokenContract = new nativeWeb3.eth.Contract(abi, contractAddress);
-        const marketPlaceContract = new nativeWeb3.eth.Contract(marketAbi, marketAddress);
-        walletProvider = { account: walletProvider.account, contract: tokenContract, market: marketPlaceContract, web3: nativeWeb3 };
+        walletProvider = { account: walletProvider.account, contract: tokenContract, web3: nativeWeb3 };
     }
 
     callback && callback(isEthAddress());
@@ -259,6 +268,17 @@ async function getPublicPrice(callback) {
     return result;
 }
 
+async function getMints(owner, callback) {
+    var result = 0;
+    await alchemyProvider.contract.methods
+        ._mints(owner)
+        .call()
+        .then((receipt) => {
+            result = receipt;
+        });
+    callback && callback(result);
+    return result;
+}
 
 //contract methods\\ SEND
 
@@ -275,7 +295,7 @@ async function mintVikings(quantity, price, callback) {
         });
     gas = Math.round(gas * 1.2);
     await walletProvider.contract.methods
-        .mintVikings(quantity)
+        .mint(quantity)
         .send({
             from: walletProvider.account,
             value: normalPrice,
@@ -296,4 +316,3 @@ async function mintVikings(quantity, price, callback) {
     callback && callback(result);
     return result;
 }
-
