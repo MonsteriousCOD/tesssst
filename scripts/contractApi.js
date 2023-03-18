@@ -83,20 +83,9 @@ async function _getPublicPrice(callback) {
     callback && callback(result);
     return result;
 }
-async function _getMints(address, callback) {
-    var result = 0;
-    await alchemyProvider.contract.methods
-        ._mints(address)
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
 
 
-//////////////////////////
+/////////////////////////
 // WALLET WALLET WALLET //  
 //////////////////////////
 
@@ -258,17 +247,6 @@ async function getPublicPrice(callback) {
     return result;
 }
 
-async function getMints(owner, callback) {
-    var result = 0;
-    await alchemyProvider.contract.methods
-        ._mints(owner)
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
 
 //contract methods\\ SEND
 
@@ -306,4 +284,3 @@ async function mintVikings(quantity, price, callback) {
     callback && callback(result);
     return result;
 }
-
