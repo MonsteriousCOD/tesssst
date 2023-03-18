@@ -194,8 +194,8 @@ async function addTestNetwork(callback) {
         method: "wallet_addEthereumChain",
         params: [{
             chainId: "0x5",
-            rpcUrls: ["https://goerli.infura.io/v3/rpc"],
-            chainName: "Arbitrum Goerli",
+            rpcUrls: ["https://goerli.infura.io/v3/231a1415f18649b385da356985171bc0"],
+            chainName: "Ethereum Goerli",
             nativeCurrency: {
                 name: "GoerliETH",
                 symbol: "ETH",
@@ -213,7 +213,7 @@ async function addMainNetwork(callback) {
         method: "wallet_addEthereumChain",
         params: [{
             chainId: "0x1",
-            rpcUrls: ["https://mainnet.infura.io/v3/rpc"],
+            rpcUrls: ["https://mainnet.infura.io/v3/231a1415f18649b385da356985171bc0"],
             chainName: "Ethereum",
             nativeCurrency: {
                 name: "ETH",
