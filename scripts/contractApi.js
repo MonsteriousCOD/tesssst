@@ -71,30 +71,18 @@ async function _getSupply(callback) {
     return result;
 }
 
-async function _getBounty(tokenId, callback) {
-    let bounty = 0;
-    await alchemyProvider.contract.methods
-        .getBounty(tokenId)
-        .call()
-        .then((receipt) => {
-            bounty = receipt;
-        });
-    callback && callback(bounty);
-    return bounty;
-}
 
 async function _getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
-        price()
-        call()
-        then((receipt) => {
+        .publicPrice()
+        .call()
+        .then((receipt) => {
             result = receipt;
         });
     callback && callback(result);
     return result;
 }
-
 async function _getMints(address, callback) {
     var result = 0;
     await alchemyProvider.contract.methods
@@ -106,6 +94,7 @@ async function _getMints(address, callback) {
     callback && callback(result);
     return result;
 }
+
 
 //////////////////////////
 // WALLET WALLET WALLET //  
@@ -135,7 +124,8 @@ async function setupWalletConnection(contractAddress, abi,callback) {
 
         const nativeWeb3 = new Web3(window.ethereum);
         const tokenContract = new nativeWeb3.eth.Contract(abi, contractAddress);
-        walletProvider = { account: walletProvider.account, contract: tokenContract, web3: nativeWeb3 };
+        const marketPlaceContract = new nativeWeb3.eth.Contract(marketAbi, marketAddress);
+        walletProvider = { account: walletProvider.account, contract: tokenContract, market: marketPlaceContract, web3: nativeWeb3 };
     }
 
     callback && callback(isEthAddress());
@@ -204,7 +194,7 @@ async function addTestNetwork(callback) {
         method: "wallet_addEthereumChain",
         params: [{
             chainId: "0x5",
-            rpcUrls: ["https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"],
+            rpcUrls: ["https://goerli.infura.io/v3/rpc"],
             chainName: "Arbitrum Goerli",
             nativeCurrency: {
                 name: "GoerliETH",
@@ -223,7 +213,7 @@ async function addMainNetwork(callback) {
         method: "wallet_addEthereumChain",
         params: [{
             chainId: "0x1",
-            rpcUrls: ["https://mainnet.infura.io/v3/231a1415f18649b385da356985171bc0"],
+            rpcUrls: ["https://mainnet.infura.io/v3/rpc"],
             chainName: "Ethereum",
             nativeCurrency: {
                 name: "ETH",
@@ -259,7 +249,7 @@ async function getSupply(callback) {
 async function getPublicPrice(callback) {
     var result = 0;
     await walletProvider.contract.methods
-        .price()
+        .publicPrice()
         .call()
         .then((receipt) => {
             result = receipt;
@@ -288,14 +278,14 @@ async function mintVikings(quantity, price, callback) {
     let result = {};
     result.success = false;
     let gas = await walletProvider.contract.methods
-        .mint(quantity)
+        .mintVikings(quantity)
         .estimateGas({
             from: walletProvider.account,
             value: normalPrice,
         });
     gas = Math.round(gas * 1.2);
     await walletProvider.contract.methods
-        .mint(quantity)
+        .mintVikings(quantity)
         .send({
             from: walletProvider.account,
             value: normalPrice,
@@ -316,3 +306,4 @@ async function mintVikings(quantity, price, callback) {
     callback && callback(result);
     return result;
 }
+
