@@ -86,9 +86,9 @@ async function _getBounty(tokenId, callback) {
 async function _getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
-        .price()
-        .call()
-        .then((receipt) => {
+        price()
+        call()
+        then((receipt) => {
             result = receipt;
         });
     callback && callback(result);
