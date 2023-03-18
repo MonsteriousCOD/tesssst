@@ -160,7 +160,7 @@
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
-    document.getElementById('mintBtn').addEventListener('click', function (e) { mintG(); });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintVikings(); });
 
     let mintSlider = document.getElementById('mintSlider');
     mintSlider.addEventListener('input', function (e) {
@@ -169,7 +169,6 @@
     });
 
     let tokenPrice = 0;
-    let userMints = 0;
     let connected = false;
     let supply = 0;
     _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
@@ -208,16 +207,18 @@
       });
     }
 
-    function OnConnected() {
-      connected = true;
-      getMints(walletProvider.account, mints => {
-        userMints = mints;
-        console.log("Connected, on the right chain, fetching mints: " + mints);
-        document.getElementById("connectButton").innerText = "CONNECTED";
+  function OnConnected() {
+   connected = true;
+   console.log("Connected and on the right chain.");
+   document.getElementById("connectButton").innerText = "CONNECTED";
 
-        document.getElementById('mintSlider').to = (5 - userMints);
-      })
-    }
+    // Remove the following line if you don't want to update the mintSlider
+   document.getElementById('mintSlider').to = 5; // Set this value according to your needs
+ 
+ }
+
+    
+    
 
 
     function updateSupplyUI(supply, price) {
