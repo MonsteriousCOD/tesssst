@@ -105,7 +105,7 @@
           <div class="range">
             <input class="rangeInput" id="mintSlider" type="range" name="rangeInput" value="1" min="1" max="20">
           </div>
-          <div class="rangeQty">
+          <div class="qty">
             <span class="rangeValue" id="rangeValue">1 </span>
           </div>
           <div class="rangePricing">
@@ -227,7 +227,9 @@
     }
 
     function mintVikings() {
+
       var successContaier = document.getElementById("congratsContainer");
+      var qty = document.getElementById("mintSlider").value;
       successContaier.style.visibility = 'hidden';
 
       if (!connected) {
@@ -235,7 +237,7 @@
       }
       else {
         
-        mintVikings(quantity, tokenPrice, result => {
+        mintVikings(qty, tokenPrice, result => {
               if (result.success) {
                 successContaier.style.visibility = 'visible';
               }
