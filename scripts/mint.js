@@ -1,9 +1,7 @@
-
 /*
 let blockchain = {};
 let contractAddress = "0x70018F054C52548C93e1c2253841ed98276A1ef0";
 let mintingPrice = 0;
-
 function isEthAddress() {
   return (
     !!blockchain.account && /^(0x)?[0-9a-f]{40}$/i.test(blockchain.account)
@@ -12,7 +10,6 @@ function isEthAddress() {
 function setAddress(addr){
   contractAddress=addr;
   console.log("Address set to " + contractAddress);
-
 }
 async function connect(callback) {
   
@@ -22,7 +19,6 @@ async function connect(callback) {
     console.warn('no eth installed');
     return false;
   }
-
   if (!isEthAddress()) {
     console.log("WEB3 DETECT")
     const isEnabled = await window.ethereum.enable();
@@ -32,7 +28,6 @@ async function connect(callback) {
       blockchain.account = accounts[0];
     }
   }
-
  
   console.log("Contracct is: " + contractAddress.length);
   if (isEthAddress()) {
@@ -41,12 +36,9 @@ async function connect(callback) {
     const myContract = new web3.eth.Contract(abi,contractAddress);
     blockchain = {account: blockchain.account,myContract,web3,};
   }
-
   callback && callback(isEthAddress());
-
   return isEthAddress();
 }
-
 async function mintVikings(quantity,successContaier) {
   let price = 10000000000000000;
   let normalPrice = price * quantity;
@@ -54,7 +46,6 @@ async function mintVikings(quantity,successContaier) {
     console.log('No Connection to eth');
     return;
   }
-
   try {
     let gas = await blockchain.myContract.methods
       .mintVikings(quantity)
@@ -86,24 +77,6 @@ async function mintVikings(quantity,successContaier) {
   catch (error) {
     console.log(error);
   }
-
-}
-
-
-async function getStage(callback) {
-  let stage = 0;
-  await blockchain.myContract.methods
-    ._phase()
-    .call()
-    .then((receipt) => {
-      console.log("Stage is: " + receipt);
-      stage = receipt;
-      callback && callback(stage);
-      return stage;
-    });
-  callback && callback(stage);
-  return stage;
-
 }
 async function getPrice(callback) {
   let price = 0;
@@ -118,7 +91,6 @@ async function getPrice(callback) {
     });
   callback && callback(price);
   return price;
-
 }
 async function getSupply(callback) {
   let supply = 0;
@@ -134,12 +106,10 @@ async function getSupply(callback) {
   callback && callback(supply);
   return supply;
 }
-
 //series page - range
 $('.rangeInput').on('input', (e) => {
   $('.rangeValue').text(e.currentTarget.value);
 });
-
 $('.rangeInput').on('input', (e) => {
   $('.rangePrice').text((Math.round(e.currentTarget.value * 0.01 * 10000) / 10000).toString() + " ETH");
 });
