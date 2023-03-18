@@ -176,7 +176,7 @@
     let userMints = 0;
     let connected = false;
     let supply = 0;
-    _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
+    _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
       _getPublicPrice((price) => {
         tokenPrice = ToEth(price);
@@ -190,7 +190,7 @@
     
    
     function connectWallet() {
-      setupWalletConnectionMint(contractAddress, abiContract,abi).then((connected) => {
+      setupWalletConnectionMint(contractAddress,abi).then((connected) => {
         getUserChain(result => {
           if (result == ethereumGoerliId) {
             OnConnected();
