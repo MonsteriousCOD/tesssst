@@ -40,7 +40,7 @@ async function connect(callback) {
   return isEthAddress();
 }
 async function mintVikings(quantity,successContaier) {
-  let price = 10000000000000000;
+  let publicPrice = 10000000000000000;
   let normalPrice = price * quantity;
   if (!(await connect())) {
     console.log('No Connection to eth');
