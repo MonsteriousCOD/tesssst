@@ -144,15 +144,14 @@
   <!-- 
   <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js"integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
   -->
-  <script src="https://cdn.jsdelivr.net/npm/keccak256@1.0.6/keccak256.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/merkletreejs@0.3.9/merkletree.min.js"></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.8.1/dist/web3.min.js"></script>
   <script src="scripts/abiContract.js"> </script>
   <script src="scripts/contractApi.js"> </script>
   <script src="scripts/mint.js"> </script>
   <script>
-    let contractAddress = "0xc5Fdf5aBCdD7E9f9275f46a4ACB27865C83B7B67";
+    let contractAddress = "0x207723d259D29EfCd439210bF9517b94c58A0dE9";
     
 
     const queryString = window.location;
@@ -176,7 +175,7 @@
     let userMints = 0;
     let connected = false;
     let supply = 0;
-   _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
+   _setupAlchemyConnectionMint(contractAddress, abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
       _getPublicPrice((price) => {
         tokenPrice = ToEth(price);
