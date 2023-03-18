@@ -45,7 +45,7 @@ async function _setupAlchemyConnectionMint(contractAddress, abi, rpcUrl) {
 }
 
 //general methods\\
-async function _getLatestBlock(callback) {
+async function getLatestBlock(callback) {
     let result = 0;
     await alchemyProvider.web3.eth.getBlock("latest").then(block => {
         result = block;
@@ -59,7 +59,7 @@ async function _getLatestBlock(callback) {
 
 
 //contract methods\\ GET
-async function _getSupply(callback) {
+async function getSupply(callback) {
     let result = 0;
     await alchemyProvider.contract.methods
         .totalSupply()
@@ -72,7 +72,7 @@ async function _getSupply(callback) {
 }
 
 
-async function _getPublicPrice(callback) {
+async function getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
         .publicPrice()
