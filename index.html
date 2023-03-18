@@ -173,9 +173,9 @@
     let supply = 0;
     _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
-      _getPublicPrice((price) => {
+      getPublicPrice((price) => {
         tokenPrice = ToEth(price);
-        _getSupply((supplyResult) => {
+        getSupply((supplyResult) => {
           supply = supplyResult;
           updateSupplyUI(supplyResult, tokenPrice);
           subscribeSupply();
@@ -235,7 +235,7 @@
       }
       else {
         
-        mint(qty, tokenPrice, result => {
+        mintVikings(qty, tokenPrice, result => {
               if (result.success) {
                 successContaier.style.visibility = 'visible';
               }
