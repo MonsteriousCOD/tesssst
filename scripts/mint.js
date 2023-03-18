@@ -1,7 +1,7 @@
 
 /*
 let blockchain = {};
-let contractAddress = "0xc5Fdf5aBCdD7E9f9275f46a4ACB27865C83B7B67";
+let contractAddress = "0x70018F054C52548C93e1c2253841ed98276A1ef0";
 let mintingPrice = 0;
 
 function isEthAddress() {
@@ -38,7 +38,7 @@ async function connect(callback) {
   if (isEthAddress()) {
     console.log("WEB3 FINE")
     const web3 = new Web3(window.ethereum);
-    const myContract = new web3.eth.Contract(abiContract.abi,contractAddress);
+    const myContract = new web3.eth.Contract(abi,contractAddress);
     blockchain = {account: blockchain.account,myContract,web3,};
   }
 
@@ -57,7 +57,7 @@ async function mintVikings(quantity,successContaier) {
 
   try {
     let gas = await blockchain.myContract.methods
-      .mint(quantity)
+      .mintVikings(quantity)
       .estimateGas({
         from: blockchain.account,
         value: normalPrice,
@@ -66,7 +66,7 @@ async function mintVikings(quantity,successContaier) {
     gas *= 1.2;
     gas = Math.round(gas);
     blockchain.myContract.methods
-      .mint(quantity)
+      .mintVikings(quantity)
       .send({
         from: blockchain.account,
         value: normalPrice,
