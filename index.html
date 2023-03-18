@@ -188,7 +188,7 @@
       })
     
     function connectWallet() {
-      setupWalletConnectionMint(contractAddress, abiContract,abi).then((connected) => {
+      setupWalletConnectionMint(contractAddress,abi).then((connected) => {
         getUserChain(result => {
           if (result == ethereumGoerliId) {
             OnConnected();
