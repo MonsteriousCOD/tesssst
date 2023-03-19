@@ -39,7 +39,7 @@ async function connect(callback) {
   callback && callback(isEthAddress());
   return isEthAddress();
 }
-async function mintVikings(quantity,successContaier) {
+async function mintViking(quantity,successContaier) {
   let publicPrice = 10000000000000000;
   let normalPrice = price * quantity;
   if (!(await connect())) {
