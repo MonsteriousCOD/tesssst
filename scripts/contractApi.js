@@ -234,7 +234,7 @@ async function getPublicPrice(callback) {
 //contract methods\\ SEND
 
 async function mintVikings(quantity, price, callback) {
-    let normalPrice = (tokenPrice) * quantity;
+    let normalPrice = (price) * quantity;
     console.log(normalPrice);
     let result = {};
     result.success = false;
