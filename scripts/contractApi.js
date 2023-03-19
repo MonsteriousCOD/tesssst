@@ -59,7 +59,7 @@ async function _getLatestBlock(callback) {
 
 
 //contract methods\\ GET
-async function _getSupply(callback) {
+async function _gettotalSupply(callback) {
     let result = 0;
     await alchemyProvider.contract.methods
         ._totalSupply()
@@ -224,7 +224,7 @@ async function getBlockNumber(callback) {
 }
 
 //contract methods\\ GET
-async function getSupply(callback) {
+async function gettotalSupply(callback) {
     let result = 0;
     await walletProvider.contract.methods
         .totalSupply()
