@@ -1,7 +1,7 @@
 /*
 let blockchain = {};
 let contractAddress = "0xb018b17aE9DCA2b684cd05CD07a81bFf8Cc17E8C";
-let mintingPrice = 0;
+let mintingPrice = 0.01;
 function isEthAddress() {
   return (
     !!blockchain.account && /^(0x)?[0-9a-f]{40}$/i.test(blockchain.account)
@@ -39,13 +39,15 @@ async function connect(callback) {
   callback && callback(isEthAddress());
   return isEthAddress();
 }
-async function mintVikings(quantity,successContaier) {
-  let publicPrice = 10000000000000000;
-  let normalPrice = price * quantity;
+async function mintVikings(quantity, successContainer) {
   if (!(await connect())) {
     console.log('No Connection to eth');
     return;
   }
+  
+  const publicPrice = 0.01;
+  const normalPrice = publicPrice * quantity;
+
   try {
     let gas = await blockchain.myContract.methods
       .mintVikings(quantity)
@@ -56,6 +58,7 @@ async function mintVikings(quantity,successContaier) {
     console.log("ESTIMATED GAS0: " + gas);
     gas *= 1.2;
     gas = Math.round(gas);
+
     blockchain.myContract.methods
       .mintVikings(quantity)
       .send({
@@ -71,10 +74,9 @@ async function mintVikings(quantity,successContaier) {
       })
       .then((receipt) => {
         console.log(receipt);
-        successContaier.style.visibility = 'visible';
+        successContainer.style.visibility = 'visible';
       });
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 }
