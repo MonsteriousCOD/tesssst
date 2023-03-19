@@ -160,7 +160,7 @@
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
-    document.getElementById('mintBtn').addEventListener('click', function (e) {mintVikings(); });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintG(); });
 
     let mintSlider = document.getElementById('mintSlider');
     mintSlider.addEventListener('input', function (e) {
@@ -175,7 +175,7 @@
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
        //getPublicPrice((price) => {
          //tokenPrice = ToEth(price);
-        _getTotalSupply((supplyResult) => {
+        _getSupply((supplyResult) => {
           supply = supplyResult;
           updateSupplyUI(supplyResult, tokenPrice);
           subscribeSupply();
@@ -229,24 +229,24 @@
 
 
 
-    function mintViking() {
+ function mintG() {
+  var successContaier = document.getElementById("congratsContainer");
+  successContaier.style.visibility = 'hidden';
 
-      var successContaier = document.getElementById("congratsContainer");
-      var qty = document.getElementById("mintSlider").value;
-      successContaier.style.visibility = 'hidden';
-
-      if (!connected) {
-        blinkConnectWallet();
+  if (!connected) {
+    blinkConnectWallet();
+  } else {
+    var qty = document.getElementById("mintSlider").value;
+    mintViking(qty, tokenPrice, result => {
+      if (result.success) {
+        successContaier.style.visibility = 'visible';
+      } else {
+        console.log("Minting failed");
       }
-      else {
-        
-        mintVikings(qty, tokenPrice, result => {
-              if (result.success) {
-                successContaier.style.visibility = 'visible';
-              }
     });
   }
-}         
+}
+  
               
               
               
