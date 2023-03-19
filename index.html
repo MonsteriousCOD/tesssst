@@ -237,7 +237,7 @@
     blinkConnectWallet();
   } else {
     var qty = document.getElementById("mintSlider").value;
-    mintViking(qty, tokenPrice, result => {
+    mintVikings(qty, tokenPrice, result => {
       if (result.success) {
         successContaier.style.visibility = 'visible';
       } else {
