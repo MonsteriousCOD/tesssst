@@ -1,6 +1,6 @@
 /*
 let blockchain = {};
-let contractAddress = "0x70018F054C52548C93e1c2253841ed98276A1ef0";
+let contractAddress = "0xb018b17aE9DCA2b684cd05CD07a81bFf8Cc17E8C";
 let mintingPrice = 0;
 function isEthAddress() {
   return (
@@ -39,7 +39,7 @@ async function connect(callback) {
   callback && callback(isEthAddress());
   return isEthAddress();
 }
-async function mintG(quantity,successContaier) {
+async function mintVikings(quantity,successContaier) {
   let publicPrice = 10000000000000000;
   let normalPrice = price * quantity;
   if (!(await connect())) {
@@ -78,7 +78,7 @@ async function mintG(quantity,successContaier) {
     console.log(error);
   }
 }
-async function getPrice(callback) {
+async function getPublicPrice(callback) {
   let price = 0;
   await blockchain.myContract.methods
     ._publicPrice()
@@ -92,7 +92,7 @@ async function getPrice(callback) {
   callback && callback(price);
   return price;
 }
-async function getSupply(callback) {
+async function getTotalSupply(callback) {
   let supply = 0;
   await blockchain.myContract.methods
     .totalSupply()
