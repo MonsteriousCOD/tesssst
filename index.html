@@ -160,7 +160,7 @@
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
-    document.getElementById('mintBtn').addEventListener('click', function (e) { mintV(); });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintVikings(); });
 
     let mintSlider = document.getElementById('mintSlider');
     mintSlider.addEventListener('input', function (e) {
@@ -229,7 +229,7 @@
 
 
 
- function mintV() {
+function mintVikings() {
   var successContaier = document.getElementById("congratsContainer");
   successContaier.style.visibility = 'hidden';
 
@@ -237,8 +237,8 @@
     blinkConnectWallet();
   } else {
     var qty = document.getElementById("mintSlider").value;
-      mintVikings(qty, publicPrice, result => {
-      if (result.success) {
+    mintVikings(qty, callback => {
+      if (callback.success) {
         successContaier.style.visibility = 'visible';
       } else {
         console.log("Minting failed");
