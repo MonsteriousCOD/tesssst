@@ -233,7 +233,7 @@ async function getPublicPrice(callback) {
 
 //contract methods\\ SEND
 
-async function mintVikings(quantity, successCallback) {
+async function mintVik(quantity, successCallback) {
   const publicPrice = 0.01;
   const normalPrice = publicPrice * quantity;
   let result = {};
