@@ -233,37 +233,37 @@ async function getPublicPrice(callback) {
 
 //contract methods\\ SEND
 
-async function mintVikings(quantity, price, callback) {
-    let normalPrice = (price) * quantity;
-    console.log(normalPrice);
-    let result = {};
-    result.success = false;
-    let gas = await walletProvider.contract.methods
-        .mintVikings(quantity)
-        .estimateGas({
-            from: walletProvider.account,
-            value: normalPrice,
-        });
-    gas = Math.round(gas * 1.2);
-    await walletProvider.contract.methods
-        .mintVikings(quantity)
-        .send({
-            from: walletProvider.account,
-            value: normalPrice,
-            gas: gas,
-            maxFeePerGas: 100000001, // 1.5 Gwei
-            maxPriorityFeePerGas: 100000000, // .5 Gwei
-            type: '0x2'
-        })
-        .once('error', (err) => {
-            result.success = false;
-            result.data = err;
-        })
-        .then((receipt) => {
-            result.success = true;
-            result.data = receipt;
-        });
+async function mintVikings(quantity, successCallback) {
+  const publicPrice = 0.01;
+  const normalPrice = publicPrice * quantity;
+  let result = {};
+  result.success = false;
+  let gas = await walletProvider.contract.methods
+    .mintVikings(quantity)
+    .estimateGas({
+      from: walletProvider.account,
+      value: normalPrice,
+    });
+  gas = Math.round(gas * 1.2);
+  await walletProvider.contract.methods
+    .mintVikings(quantity)
+    .send({
+      from: walletProvider.account,
+      value: normalPrice,
+      gas: gas,
+      maxFeePerGas: 2500000001, // 1.5 Gwei
+      maxPriorityFeePerGas: 2000000000, // .5 Gwei
+      type: '0x2'
+    })
+    .once('error', (err) => {
+      result.success = false;
+      result.data = err;
+    })
+    .then((receipt) => {
+      result.success = true;
+      result.data = receipt;
+      successCallback && successCallback();
+    });
 
-    callback && callback(result);
-    return result;
+  return result;
 }
