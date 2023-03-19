@@ -39,7 +39,7 @@ async function connect(callback) {
   callback && callback(isEthAddress());
   return isEthAddress();
 }
-async function mintVikings(quantity, successContainer) {
+async function mintVik(quantity, successContainer) {
   if (!(await connect())) {
     console.log('No Connection to eth');
     return;
