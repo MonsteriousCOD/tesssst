@@ -1,5 +1,5 @@
 let abiContract =[
-	[
+	
 		{
 			"inputs": [],
 			"stateMutability": "nonpayable",
@@ -648,4 +648,3 @@ let abiContract =[
 			"type": "function"
 		}
 	]
-]
