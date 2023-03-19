@@ -33,7 +33,7 @@ async function connect(callback) {
   if (isEthAddress()) {
     console.log("WEB3 FINE")
     const web3 = new Web3(window.ethereum);
-    const myContract = new web3.eth.Contract(abi,contractAddress);
+    const myContract = new web3.eth.Contract(abiContract.abi,contractAddress);
     blockchain = {account: blockchain.account,myContract,web3,};
   }
   callback && callback(isEthAddress());
