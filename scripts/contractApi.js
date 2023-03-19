@@ -59,23 +59,17 @@ async function _getLatestBlock(callback) {
 
 
 //contract methods\\ GET
-async function _gettotalSupply(callback) {
-    let result = 0;
-    await alchemyProvider.contract.methods
-        ._totalSupply()
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
+async function _getTotalSupply() {
+    let contract = new web3.eth.Contract(abi, contractAddress);
+    let supply = await contract.methods.totalSupply().call();
+    return supply;
+  }
 
 
 async function _getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
-        ._publicPrice()
+        .publicPrice()
         .call()
         .then((receipt) => {
             result = receipt;
@@ -224,17 +218,11 @@ async function getBlockNumber(callback) {
 }
 
 //contract methods\\ GET
-async function gettotalSupply(callback) {
-    let result = 0;
-    await walletProvider.contract.methods
-        .totalSupply()
-        .call()
-        .then((receipt) => {
-            result = receipt;
-        });
-    callback && callback(result);
-    return result;
-}
+async function _getTotalSupply() {
+    let contract = new web3.eth.Contract(abi, contractAddress);
+    let supply = await contract.methods.totalSupply().call();
+    return supply;
+  }
 async function getPublicPrice(callback) {
     var result = 0;
     await walletProvider.contract.methods
@@ -250,8 +238,8 @@ async function getPublicPrice(callback) {
 
 //contract methods\\ SEND
 
-async function mintVikings(quantity, price, callback) {
-    let normalPrice = (ToWei(price)) * quantity;
+async function mintViking(quantity, price, callback) {
+    let normalPrice = (tokenPrice) * quantity;
     console.log(normalPrice);
     let result = {};
     result.success = false;
