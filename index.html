@@ -175,7 +175,7 @@
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
        //getPublicPrice((price) => {
          //tokenPrice = ToEth(price);
-        _getSupply((supplyResult) => {
+        _getTotalSupply((supplyResult) => {
           supply = supplyResult;
           updateSupplyUI(supplyResult, tokenPrice);
           subscribeSupply();
