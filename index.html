@@ -173,9 +173,9 @@
     let supply = 0;
     _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
-      getPublicPrice((price) => {
+      _getPublicPrice((price) => {
         tokenPrice = ToEth(price);
-        getSupply((supplyResult) => {
+        _getSupply((supplyResult) => {
           supply = supplyResult;
           updateSupplyUI(supplyResult, tokenPrice);
           subscribeSupply();
