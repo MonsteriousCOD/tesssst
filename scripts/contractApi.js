@@ -62,7 +62,7 @@ async function _getLatestBlock(callback) {
 async function _getSupply(callback) {
     let result = 0;
     await alchemyProvider.contract.methods
-        .totalSupply()
+        ._totalSupply()
         .call()
         .then((receipt) => {
             result = receipt;
@@ -75,7 +75,7 @@ async function _getSupply(callback) {
 async function _getPublicPrice(callback) {
     var result = 0;
     await alchemyProvider.contract.methods
-        .publicPrice()
+        ._publicPrice()
         .call()
         .then((receipt) => {
             result = receipt;
