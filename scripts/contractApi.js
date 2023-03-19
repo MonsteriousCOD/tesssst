@@ -217,12 +217,7 @@ async function getBlockNumber(callback) {
     return result;
 }
 
-//contract methods\\ GET
-async function _getTotalSupply() {
-    let contract = new web3.eth.Contract(abi, contractAddress);
-    let supply = await contract.methods.totalSupply().call();
-    return supply;
-  }
+
 async function getPublicPrice(callback) {
     var result = 0;
     await walletProvider.contract.methods
