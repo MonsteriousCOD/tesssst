@@ -171,7 +171,7 @@
     let publicPrice = 0.01;
     let connected = false;
     let supply = 0;
-    _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
+    _setupAlchemyConnectionMint(contractAddress, abiContract.abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
        _getPublicPrice((price) => {
          publicPrice = ToEth(price);
@@ -185,7 +185,7 @@
     
    
     function connectWallet() {
-      setupWalletConnectionMint(contractAddress,abi).then((connected) => {
+      setupWalletConnectionMint(contractAddress, abiContract.abi).then((connected) => {
         getUserChain(result => {
           if (result == ethereumGoerliChainId) {
             OnConnected();
