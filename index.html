@@ -160,7 +160,7 @@
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
-    document.getElementById('mintBtn').addEventListener('click', function (e) { mintVikings(); });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintViking(); });
 
     let mintSlider = document.getElementById('mintSlider');
     mintSlider.addEventListener('input', function (e) {
@@ -229,7 +229,7 @@
 
 
 
-function mintVikings() {
+function mintViking() {
   var successContaier = document.getElementById("congratsContainer");
   successContaier.style.visibility = 'hidden';
 
