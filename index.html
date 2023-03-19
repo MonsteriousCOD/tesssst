@@ -168,19 +168,19 @@
       document.getElementById('rangeValue').innerText = (mintSlider.value).toString();
     });
 
-    let tokenPrice = 0;
+    let tokenPrice = 0.01;
     let connected = false;
     let supply = 0;
     _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
-      _getPublicPrice((price) => {
-        tokenPrice = ToEth(price);
-        _getSupply((supplyResult) => {
+       //getPublicPrice((price) => {
+         //tokenPrice = ToEth(price);
+        _gettotalSupply((supplyResult) => {
           supply = supplyResult;
           updateSupplyUI(supplyResult, tokenPrice);
           subscribeSupply();
            });
-        })
+         //})
       })
     
    
@@ -226,7 +226,7 @@
       document.getElementById("pod").innerHTML = `${(supply * price).toFixed(3)} ETH`
     }
 
-    function mintViking() {
+    function mintVikings() {
 
       var successContaier = document.getElementById("congratsContainer");
       var qty = document.getElementById("mintSlider").value;
