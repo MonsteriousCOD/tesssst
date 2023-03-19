@@ -137,8 +137,6 @@
 
 
   </main>
-  <!-- The legacy-web3 script must run BEFORE your other scripts. -->
-    <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <!-- 
@@ -162,27 +160,27 @@
     let alchemyUrl = testnet ? testnetAlchemyUrl : mainnetAlchemyUrl;
     console.log(alchemyUrl);
     document.getElementById('connectButton').addEventListener('click', function (e) { connectWallet(); });
-    document.getElementById('mintBtn').addEventListener('click', function (e) { mintVikings; });
+    document.getElementById('mintBtn').addEventListener('click', function (e) { mintVikings(); });
 
     let mintSlider = document.getElementById('mintSlider');
     mintSlider.addEventListener('input', function (e) {
-      document.getElementById('rangePrice').innerText = ((Math.round(mintSlider.value * tokenPrice * 10000) / 10000).toString() + " ETH");
+      document.getElementById('rangePrice').innerText = ((Math.round(mintSlider.value * publicPrice * 10000) / 10000).toString() + " ETH");
       document.getElementById('rangeValue').innerText = (mintSlider.value).toString();
     });
 
-    let tokenPrice = 0.01;
+    let publicPrice = 0.01;
     let connected = false;
     let supply = 0;
     _setupAlchemyConnectionMint(contractAddress,abi, alchemyUrl).then(() => {
       console.log("Correctly setup alchemyProvider and contract at: " + contractAddress);
-       //_gettokenPrice((price) => {
-         _tokenPrice = ToEth(price);
-        _gettotalSupply((supplyResult) => {
+       _getPublicPrice((price) => {
+         publicPrice = ToEth(price);
+        _getSupply((supplyResult) => {
           supply = supplyResult;
-          updateSupplyUI(supplyResult, tokenPrice);
+          updateSupplyUI(supplyResult, publicPrice);
           subscribeSupply();
            });
-         //})
+         })
       })
     
    
@@ -239,7 +237,7 @@
     blinkConnectWallet();
   } else {
     var qty = document.getElementById("mintSlider").value;
-    mintViking(qty, tokenPrice, result => {
+      mintVikings(qty, publicPrice, result => {
       if (result.success) {
         successContaier.style.visibility = 'visible';
       } else {
