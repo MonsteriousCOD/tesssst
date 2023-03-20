@@ -1,6 +1,5 @@
-let abi =[
-	
-		{
+const abiContract = {
+  abi: [{
 			"inputs": [],
 			"stateMutability": "nonpayable",
 			"type": "constructor"
@@ -647,4 +646,7 @@ let abi =[
 			"stateMutability": "nonpayable",
 			"type": "function"
 		}
-	]
+    
+  ]
+};
+	
