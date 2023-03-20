@@ -1,4 +1,4 @@
-let abiContract ={
+let abi ={
 	
 		{
 			"inputs": [],
