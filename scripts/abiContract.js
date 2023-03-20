@@ -1,4 +1,4 @@
-const abiContract = {
+const abiContract.abi = {
   abi: [{
 			"inputs": [],
 			"stateMutability": "nonpayable",
@@ -649,4 +649,4 @@ const abiContract = {
     
   ]
 };
-export default abiContract;	
+export default abiContract.abi;	
