@@ -3,7 +3,7 @@ let contractAddress = "0xb018b17aE9DCA2b684cd05CD07a81bFf8Cc17E8C";
 let mintingPrice = 0.01;
 
 // Add the ABI array here
-const abi = [[
+const abiContract = [[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
