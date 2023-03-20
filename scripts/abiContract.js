@@ -649,4 +649,4 @@ const abiContract = {
     
   ]
 };
-export default abiContract.abi;	
+export default abiContract;	
