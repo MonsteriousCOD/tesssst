@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MetaMask Wallet Addresses</title>
-  <script src="https://cdn.jsdelivr.net/npm/metamask-legacy-web3"></script>
 </head>
 <body>
   <h1>MetaMask Wallet Addresses</h1>
@@ -15,13 +14,13 @@
     const walletAddressesList = document.getElementById('walletAddresses');
 
     async function getWalletAddresses() {
-      if (typeof web3 === 'undefined') {
+      if (typeof window.ethereum === 'undefined') {
         alert('Please install MetaMask to use this feature.');
         return;
       }
 
       try {
-        const accounts = await web3.eth.getAccounts();
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         walletAddressesList.innerHTML = '';
         accounts.forEach(account => {
           const listItem = document.createElement('li');
