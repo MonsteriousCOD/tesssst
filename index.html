@@ -7,11 +7,12 @@
 </head>
 <body>
   <h1>MetaMask Wallet Addresses</h1>
-  <button id="connect">Connect to MetaMask</button>
+  <button id="connect">Connect Another MetaMask Wallet</button>
   <ul id="walletAddresses"></ul>
   <script>
     const connectButton = document.getElementById('connect');
     const walletAddressesList = document.getElementById('walletAddresses');
+    const connectedAddresses = new Set();
 
     async function getWalletAddresses() {
       if (typeof window.ethereum === 'undefined') {
@@ -21,11 +22,13 @@
 
       try {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        walletAddressesList.innerHTML = '';
         accounts.forEach(account => {
-          const listItem = document.createElement('li');
-          listItem.textContent = account;
-          walletAddressesList.appendChild(listItem);
+          if (!connectedAddresses.has(account)) {
+            const listItem = document.createElement('li');
+            listItem.textContent = account;
+            walletAddressesList.appendChild(listItem);
+            connectedAddresses.add(account);
+          }
         });
       } catch (error) {
         console.error('Error connecting to MetaMask:', error);
